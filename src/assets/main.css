@@ -1,0 +1,17 @@
+:root {
+  --neutral-ligth-50: #ffffff;
+  --neutral-ligth-100: #f4f6f8;
+  --neutral-ligth-200: #e4e5f1;
+  --neutral-ligth-250: #8f9096;
+  --neutral-ligth-300: #43464c;
+  --neutral-ligth-400: #22262e;
+  --neutral-ligth-450: #272b33;
+
+  --primary-100: #6367c0;
+
+  --kumbh: "Kumbh Sans", Monospace;
+}
+
+* {
+  font-family: var(--kumbh) !important;
+}
