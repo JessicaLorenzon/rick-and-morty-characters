@@ -1,28 +1,40 @@
 <template>
   <section>
-    <img src="../assets/images/teste.jpeg" />
-    <div class="informacoes">
-      <div class="informacoes-principais">
-        <div class="informacoes-principais-sup">
-          <p>Alive</p>
-          <span class="dot"></span>
-          <p>Human</p>
-        </div>
-        <h2>Rick Sanchez</h2>
-        <p>Male</p>
+    <img :src="imageLink" />
+
+    <div class="text-container">
+      <div class="horizontal-group">
+        <p>{{ status }}</p>
+        <span class="dot"></span>
+        <p>{{ species }}</p>
       </div>
-      <p class="localizacao">Earth (C-137)</p>
+
+      <h2>{{ name }}</h2>
+      <p class="gender">{{ gender }}</p>
+
+      <p class="location">{{ location }}</p>
     </div>
   </section>
 </template>
+
+<script lang="ts">
+export default {
+  props: ["image", "id", "name", "status", "species", "gender", "location"],
+
+  data() {
+    return {
+      imageLink: this.image,
+    };
+  },
+};
+</script>
 
 <style scoped>
 section {
   background-color: var(--neutral-ligth-50);
   display: flex;
   border-radius: 10px;
-  box-shadow: 0px 4px 8px -2px rgba(16, 24, 40, 0.1),
-    0px 2px 4px -2px rgba(16, 24, 40, 0.06);
+  box-shadow: var(--shadow);
 }
 
 img {
@@ -31,20 +43,14 @@ img {
   border-radius: 10px 0 0 10px;
 }
 
-.informacoes {
+.text-container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   padding: 16px;
   flex: 1;
 }
 
-.informacoes-principais {
-  display: flex;
-  flex-direction: column;
-}
-
-.informacoes-principais-sup {
+.horizontal-group {
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
@@ -65,7 +71,11 @@ h2 {
   margin-bottom: 10px;
 }
 
-.localizacao {
+.gender {
+  flex: 1;
+}
+
+.location {
   font-size: 12px;
   color: var(--primary-100);
   font-weight: 700;
