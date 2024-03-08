@@ -20,7 +20,6 @@
 section {
   background-color: var(--neutral-ligth-50);
   display: flex;
-  margin: 30px;
   border-radius: 10px;
   box-shadow: 0px 4px 8px -2px rgba(16, 24, 40, 0.1),
     0px 2px 4px -2px rgba(16, 24, 40, 0.06);
