@@ -1,6 +1,6 @@
 <template>
   <section>
-    <img src="../assets/images/portal-rick-and-morty.gif" />
+    <img src="@/assets/images/portal-rick-and-morty.gif" />
   </section>
 </template>
 

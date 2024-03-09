@@ -1,30 +1,36 @@
 <template>
   <section>
-    <img :src="imageLink" />
+    <img :src="character.image" />
 
     <div class="text-container">
       <div class="horizontal-group">
-        <p>{{ status }}</p>
+        <p
+          :class="{
+            alive: character.status === 'Alive',
+            dead: character.status === 'Dead',
+          }"
+        >
+          {{ character.status }}
+        </p>
         <span class="dot"></span>
-        <p>{{ species }}</p>
+        <p>{{ character.species }}</p>
       </div>
 
-      <h2>{{ name }}</h2>
-      <p class="gender">{{ gender }}</p>
+      <h2>{{ character.name }}</h2>
+      <p class="gender">{{ character.gender }}</p>
 
-      <p class="location">{{ location }}</p>
+      <p class="location">{{ character.location.name }}</p>
     </div>
   </section>
 </template>
 
 <script lang="ts">
-export default {
-  props: ["image", "id", "name", "status", "species", "gender", "location"],
+import type { PropType } from "vue";
+import type ICharacter from "@/interfaces/ICharacter";
 
-  data() {
-    return {
-      imageLink: this.image,
-    };
+export default {
+  props: {
+    character: { type: Object as PropType<ICharacter>, required: true },
   },
 };
 </script>
@@ -39,7 +45,6 @@ section {
 
 img {
   width: 150px;
-  height: 150px;
   border-radius: 10px 0 0 10px;
 }
 
@@ -55,7 +60,9 @@ img {
   justify-content: space-between;
   margin-bottom: 10px;
   align-items: center;
-  width: 115px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 10px;
 }
 
 p {
@@ -84,7 +91,16 @@ h2 {
 .dot {
   height: 5px;
   width: 5px;
-  background-color: var(--neutral-ligth-250);
+  background-color: var(--neutral-ligth-200);
   border-radius: 50%;
+}
+
+.alive {
+  color: var(--primary-200);
+}
+
+.dead {
+  color: var(--primary-300);
+  text-decoration: line-through;
 }
 </style>

@@ -1,6 +1,10 @@
-export async function getCharacters(pageNumber: number) {
-  const r = await fetch(
+import type ICharacter from "@/interfaces/ICharacter";
+
+export async function getCharacters(pageNumber: number): Promise<ICharacter[]> {
+  const response = await fetch(
     `https://rickandmortyapi.com/api/character/?page=${pageNumber}`
   );
-  return r.json();
+  const formattedResponse = await response.json();
+
+  return formattedResponse.results;
 }

@@ -1,5 +1,5 @@
 <template>
-  <body>
+  <div class="container">
     <header>
       <h1>Rick and Morty Characters</h1>
     </header>
@@ -7,47 +7,53 @@
       <Card
         v-for="character in charactersList"
         :key="character.id"
-        :name="character.name"
-        :status="character.status"
-        :species="character.species"
-        :gender="character.gender"
-        :location="character.location.name"
-        :image="character.image"
+        :character="character"
       />
     </div>
-    <button @click="nextPage">Next Page</button>
     <Loading />
-  </body>
+  </div>
 </template>
 
 <script lang="ts">
 import Card from "./components/Card.vue";
 import Loading from "./components/Loading.vue";
 import { getCharacters } from "./http/index";
+import type ICharacter from "./interfaces/ICharacter";
 
 export default {
   components: { Card, Loading },
   data() {
     return {
-      charactersList: [],
+      charactersList: [] as ICharacter[],
       page: 1,
     };
   },
-  async mounted() {
-    this.nextPage();
+  mounted() {
+    this.getNextPage();
+    this.createScrollEvent();
   },
   methods: {
-    async nextPage() {
+    async getNextPage() {
       const characters = await getCharacters(this.page);
-      this.charactersList = this.charactersList.concat(characters.results);
+      this.charactersList = this.charactersList.concat(characters);
       this.page++;
+    },
+    createScrollEvent() {
+      window.onscroll = () => {
+        let bottomOfWindow =
+          document.documentElement.scrollTop + window.innerHeight ===
+          document.documentElement.offsetHeight;
+        if (bottomOfWindow) {
+          this.getNextPage();
+        }
+      };
     },
   },
 };
 </script>
 
 <style>
-body {
+.container {
   background-image: url("./assets/images/bg-stars.svg");
   background-size: contain;
   background-color: var(--neutral-ligth-100);
@@ -60,9 +66,10 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--neutral-ligth-450);
+  background-color: var(--neutral-ligth-400);
   font-weight: 700;
   color: var(--neutral-ligth-100);
+  text-align: center;
 }
 
 h1 {
@@ -73,6 +80,8 @@ h1 {
   display: grid;
   gap: 30px;
   padding: 30px;
+  max-width: 500px;
+  margin: 0 auto;
 }
 
 @media only screen and (min-width: 768px) {
