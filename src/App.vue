@@ -11,17 +11,19 @@
       />
     </div>
     <Loading />
+    <BackToTop />
   </div>
 </template>
 
 <script lang="ts">
 import Card from "./components/Card.vue";
 import Loading from "./components/Loading.vue";
+import BackToTop from "./components/BackToTop.vue";
 import { getCharacters } from "./http/index";
 import type ICharacter from "./interfaces/ICharacter";
 
 export default {
-  components: { Card, Loading },
+  components: { Card, Loading, BackToTop },
   data() {
     return {
       charactersList: [] as ICharacter[],
@@ -39,14 +41,14 @@ export default {
       this.page++;
     },
     createScrollEvent() {
-      window.onscroll = () => {
+      window.addEventListener("scroll", () => {
         let bottomOfWindow =
           document.documentElement.scrollTop + window.innerHeight ===
           document.documentElement.offsetHeight;
         if (bottomOfWindow) {
           this.getNextPage();
         }
-      };
+      });
     },
   },
 };

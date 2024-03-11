@@ -8,7 +8,7 @@
 section {
   display: flex;
   justify-content: center;
-  margin-bottom: 30px;
+  padding-bottom: 30px;
 }
 img {
   width: 80px;
