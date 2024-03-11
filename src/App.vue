@@ -59,7 +59,7 @@ export default {
   background-image: url("./assets/images/bg-stars.svg");
   background-size: contain;
   background-color: var(--neutral-ligth-100);
-  height: 100%;
+  min-height: 100vh;
 }
 
 header {
