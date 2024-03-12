@@ -28,6 +28,7 @@ export default {
     return {
       charactersList: [] as ICharacter[],
       page: 1,
+      requestInProgress: false,
     };
   },
   mounted() {
@@ -36,16 +37,18 @@ export default {
   },
   methods: {
     async getNextPage() {
+      this.requestInProgress = true;
       const characters = await getCharacters(this.page);
       this.charactersList = this.charactersList.concat(characters);
       this.page++;
+      this.requestInProgress = false;
     },
     createScrollEvent() {
       window.addEventListener("scroll", () => {
         let bottomOfWindow =
           document.documentElement.scrollTop + window.innerHeight ===
           document.documentElement.offsetHeight;
-        if (bottomOfWindow) {
+        if (bottomOfWindow && !this.requestInProgress) {
           this.getNextPage();
         }
       });
