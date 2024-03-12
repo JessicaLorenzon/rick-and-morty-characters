@@ -37,7 +37,7 @@ button {
   position: fixed;
   right: 20px;
   bottom: 20px;
-  background-color: var(--neutral-ligth-200);
+  background-color: var(--gray-200);
   display: flex;
   align-items: center;
   justify-content: center;

@@ -61,7 +61,7 @@ export default {
 .container {
   background-image: url("./assets/images/bg-stars.svg");
   background-size: contain;
-  background-color: var(--neutral-ligth-100);
+  background-color: var(--gray-100);
   min-height: 100vh;
 }
 
@@ -71,9 +71,9 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--neutral-ligth-400);
+  background-color: var(--gray-900);
   font-weight: 700;
-  color: var(--neutral-ligth-100);
+  color: var(--gray-100);
   text-align: center;
 }
 
