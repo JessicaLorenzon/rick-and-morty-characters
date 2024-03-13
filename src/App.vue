@@ -21,7 +21,7 @@
 import Card from "./components/Card.vue";
 import Loading from "./components/Loading.vue";
 import BackToTop from "./components/BackToTop.vue";
-import { getCharacters } from "./http/index";
+import { RickAndMortyService } from "./services/RickAndMortyService";
 import type ICharacter from "./interfaces/ICharacter";
 
 export default {
@@ -42,7 +42,8 @@ export default {
   methods: {
     async getNextPage() {
       this.requestInProgress = true;
-      const characters = await getCharacters(this.page);
+      const rickAndoMortyService = new RickAndMortyService();
+      const characters = await rickAndoMortyService.getCharacters(this.page);
       this.charactersList = this.charactersList.concat(characters);
       this.page++;
       this.requestInProgress = false;
@@ -122,3 +123,4 @@ h1 {
   }
 }
 </style>
+./services/index./services/RickAndMortyService
