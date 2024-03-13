@@ -8,6 +8,8 @@
         v-for="character in charactersList"
         :key="character.id"
         :character="character"
+        :favorite="isFavorite(character.id)"
+        @toggleFavorite="handleFavorite"
       />
     </div>
     <Loading />
@@ -29,9 +31,11 @@ export default {
       charactersList: [] as ICharacter[],
       page: 1,
       requestInProgress: false,
+      favoriteList: [] as number[],
     };
   },
   mounted() {
+    this.favoriteList = this.getDataFromLocalStorage();
     this.getNextPage();
     this.createScrollEvent();
   },
@@ -52,6 +56,25 @@ export default {
           this.getNextPage();
         }
       });
+    },
+    handleFavorite(id: number) {
+      if (this.favoriteList.includes(id)) {
+        const index = this.favoriteList.indexOf(id);
+        this.favoriteList.splice(index, 1);
+      } else {
+        this.favoriteList.push(id);
+      }
+      this.updateLocalStorage();
+    },
+    isFavorite(id: number) {
+      return this.favoriteList.includes(id);
+    },
+    updateLocalStorage() {
+      localStorage.setItem("favoriteList", JSON.stringify(this.favoriteList));
+    },
+    getDataFromLocalStorage() {
+      const localStorageData = localStorage.getItem("favoriteList");
+      return localStorageData ? JSON.parse(localStorageData) : [];
     },
   },
 };
