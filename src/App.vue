@@ -35,7 +35,7 @@ export default {
     };
   },
   mounted() {
-    this.favoriteList = this.getDataFromLocalStorage();
+    this.favoriteList = this.getFavoriteListFromLocalStorage();
     this.getNextPage();
     this.createScrollEvent();
   },
@@ -73,7 +73,7 @@ export default {
     updateLocalStorage() {
       localStorage.setItem("favoriteList", JSON.stringify(this.favoriteList));
     },
-    getDataFromLocalStorage() {
+    getFavoriteListFromLocalStorage() {
       const localStorageData = localStorage.getItem("favoriteList");
       return localStorageData ? JSON.parse(localStorageData) : [];
     },
